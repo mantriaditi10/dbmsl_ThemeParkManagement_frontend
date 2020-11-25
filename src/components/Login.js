@@ -5,15 +5,47 @@ import { Container } from '@material-ui/core'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import axios from 'axios';
 
 export class Login extends Component {
+
+    constructor(props){
+        super(props)
+
+        this.handleSubmit=this.handleSubmit.bind(this)
+    }
+
     state = {
         email:"",
-        password:""
+        password:"",
+        label:""
     }
     
     handleChange = input => e => {
         this.setState({[input]:e.target.value});
+    }
+
+    handleSubmit(){
+        axios.post('/users/login',{
+            email:this.state.email,
+            password:this.state.password
+        })
+        .then((res)=>{
+            if(res.data.success===true){
+                console.log(res.data.user)
+                localStorage.setItem('user',res.data.user)
+            }
+            if(res.data.success===false){
+                console.log(res.data.err)
+                this.setState({label:res.data.err})
+            }
+            
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+
+        
     }
 
     render() {
@@ -43,7 +75,8 @@ export class Login extends Component {
                             margin="normal"
                         />
                         <br/><br/>
-                        <Button variant="contained" color="primary">
+                        <p style={{color:"red"}}>{this.state.label}</p>
+                        <Button variant="contained" color="primary" onClick={this.handleSubmit}>
                             Submit
                         </Button>
                         <br/><br/>

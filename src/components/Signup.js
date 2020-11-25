@@ -5,8 +5,16 @@ import { Container } from '@material-ui/core'
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
+import axios from 'axios';
 
 class Signup extends Component {
+
+    constructor(props){
+        super(props)
+
+        this.handleSubmit=this.handleSubmit.bind(this)
+    }
+
     state = {
         fname:"",
         lname:"",
@@ -15,11 +23,39 @@ class Signup extends Component {
         state:"",
         country:"",
         email:"",
-        password:""
+        password:"",
+        label:""
     }
     
     handleChange = input => e => {
         this.setState({[input]:e.target.value});
+    }
+
+    handleSubmit(){
+        axios.post('/users/signin',{
+            
+            fname:this.state.fname,
+            lname:this.state.lname,
+            city:this.state.city,
+            state:this.state.state,
+            country:this.state.country,
+            email:this.state.email,
+            password:this.state.password,
+            mobileNo:this.state.mobile
+        })
+        .then((res)=>{
+            if(res.data.success===true){
+                console.log(res.data.user)
+                localStorage.setItem('user',res.data.user)
+            }
+            if(res.data.success===false){
+                console.log(res.data.err)
+                this.setState({label:res.data.err})
+            }
+        })
+        .catch(err=>{
+            console.log(err)
+        })
     }
 
     render() {
@@ -100,8 +136,10 @@ class Signup extends Component {
                         onChange={this.handleChange('password')}
                         margin="normal"
                         />
-                        <br/><br/>
-                        <Button variant="contained" color="primary">
+                        
+                        {/* <br/><br/> */}
+                        <p style={{color:"red"}}>{this.state.label}</p>
+                        <Button variant="contained" color="primary" onClick={this.handleSubmit}>
                             Submit
                         </Button>
                         <br/><br/>

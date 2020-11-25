@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import NavBar1 from './NavBar1'
 import TextField from '@material-ui/core/TextField'
+import axios from 'axios';
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -96,16 +97,23 @@ const tiers = [
 
 export default function Pricing() {
   const classes = useStyles();
-  const [ticketType, setTicketType] = useState('');
+  const [ticketType, setTicketType] = useState("");
   const [adults, setAdults] = useState(0);
-  const [chilren, setChildren] = useState(0);
-  const [visitDate, setDate] = useState('');
+  const [children, setChildren] = useState(0);
+  const [visitDate, setDate] = useState("");
   
-//   function handleButtonClick(type) {
-//       setTicketType(type);
-//       //console.log(type);
-//       //console.log(ticketType);
-//   }
+  function handleSubmit() {
+      axios.post('/tickets',{
+          ticketType:ticketType,
+          adults:adults,
+          children:children,
+          datOfVisit:visitDate
+      })
+      .then(res=>{
+        console.log(res)
+      })
+      .catch(err=>console.log(err))
+  }
   
   return (
     <React.Fragment>
@@ -212,7 +220,7 @@ export default function Pricing() {
                     </div>
                 </CardContent>
                 <CardActions>
-                    <Button fullWidth variant="contained" color="primary">
+                    <Button fullWidth variant="contained" color="primary" onClick={handleSubmit()}>
                         Confirm
                     </Button>
                 </CardActions>

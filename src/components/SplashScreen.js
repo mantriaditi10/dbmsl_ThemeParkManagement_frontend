@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{ useState,useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -10,6 +10,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import NavBar1 from './NavBar1'
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -43,6 +44,36 @@ const cards = [1, 2, 3];
 
 export default function SplashScreen() {
   const classes = useStyles();
+  const [rides,setRides]=useState([])
+  const [resto,setResto]=useState([])
+  const [isLoading,setIsLoading]=useState(true)
+
+  useEffect(()=>{
+      axios.get('/rides/featured')
+      .then(rides=>{
+          console.log(rides.data)
+          setRides(rides.data)
+          axios.get('/restaurants/featured')
+          .then(resto=>{
+            console.log(resto.data)
+            setResto(resto.data)
+          })
+      })
+      .then(rides=>{
+        setIsLoading(false)
+      })
+      .catch(err=>console.log(err))
+  },[])
+
+  if(isLoading===true){
+    return(
+    <div>
+      Loading...
+    </div>
+    )
+  }
+  else{
+
 
   return (
     <React.Fragment>
@@ -61,7 +92,7 @@ export default function SplashScreen() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item>
-                  <Button size="large" variant="contained" color="primary">
+                  <Button size="large" variant="contained" color="primary" href="/book">
                     Book Tickets
                   </Button>
                 </Grid>
@@ -81,20 +112,20 @@ export default function SplashScreen() {
             </Typography>
           </div>
           <Grid container spacing={4}>  
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {rides.map((ride) => (
+              <Grid item key={ride._id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
+                    image={ride.imgSRC}
+                    title={ride.name}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {ride.name}
                     </Typography>
                     <Typography>
-                      Description of Ride
+                      {ride.description}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -118,20 +149,20 @@ export default function SplashScreen() {
             </Typography>
           </div>
           <Grid container spacing={4}>  
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {resto.map((resto) => (
+              <Grid item key={resto._id} xs={12} sm={6} md={4}>
                 <Card className={classes.card}>
                   <CardMedia
                     className={classes.cardMedia}
-                    image="https://source.unsplash.com/random"
-                    title="Image title"
+                    image={resto.imgSRC}
+                    title={resto.name}
                   />
                   <CardContent className={classes.cardContent}>
                     <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                      {resto.name}
                     </Typography>
                     <Typography>
-                      Description of Restaurant
+                      {resto.description}
                     </Typography>
                   </CardContent>
                   <CardActions>
@@ -147,5 +178,7 @@ export default function SplashScreen() {
       </main>
     </React.Fragment>
   );
+
+  }
 }
 
