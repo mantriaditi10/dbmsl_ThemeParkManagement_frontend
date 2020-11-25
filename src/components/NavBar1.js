@@ -28,7 +28,7 @@ export default function NavBar1() {
             <Button className={classes.button} color="inherit">ABOUT US</Button>
             <Button className={classes.button} color="inherit">CONTACT US</Button>
             <Typography align="right" className={classes.title}>
-                username
+                Logged in as username
             </Typography>
         </Toolbar>
       </AppBar>
