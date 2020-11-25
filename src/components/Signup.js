@@ -21,8 +21,9 @@ class Signup extends Component {
     render() {
         return (
             <div>
-                <br />
+                <br/>
                 <h3>Enter your Details for signing up!</h3>
+                
                 <TextField 
                    id="fname"
                    label="First Name" 
