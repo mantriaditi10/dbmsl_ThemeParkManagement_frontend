@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState,useEffect } from 'react'
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { Container } from '@material-ui/core'
@@ -6,38 +6,35 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import axios from 'axios';
+import {useHistory} from 'react-router'
 
-export class Login extends Component {
-
-    constructor(props){
-        super(props)
-
-        this.handleSubmit=this.handleSubmit.bind(this)
-    }
-
-    state = {
-        email:"",
-        password:"",
-        label:""
-    }
+function Login (props){
+    const [email,setEmail] = useState("");
+    const [password ,setPassword] = useState("")
+    const [label,setLabel] = useState("");
+    const history = useHistory()
     
-    handleChange = input => e => {
-        this.setState({[input]:e.target.value});
-    }
+    
 
-    handleSubmit(){
+    function handleSubmit(){
         axios.post('/users/login',{
-            email:this.state.email,
-            password:this.state.password
+            email:email,
+            password:password
         })
         .then((res)=>{
             if(res.data.success===true){
-                console.log(res.data.user)
-                localStorage.setItem('user',res.data.user)
+                console.log(res.data.user.name.fname)
+                localStorage.setItem("user",JSON.stringify(res.data.user))
+                // localStorage.setItem('userfname',res.data.user.name.fname)
+                // localStorage.setItem('userlname',res.data.user.name.lname)
+                // localStorage.setItem('userid',res.data.user._id)
+                setLabel("")
+                history.push('/home')
+                
             }
             if(res.data.success===false){
                 console.log(res.data.err)
-                this.setState({label:res.data.err})
+                setLabel(res.data.err)
             }
             
         })
@@ -48,7 +45,7 @@ export class Login extends Component {
         
     }
 
-    render() {
+    
         return (
             <React.Fragment>
                 <Container>
@@ -63,7 +60,7 @@ export class Login extends Component {
                             id="Email"
                             label="Email" 
                             variant="outlined"
-                            onChange={this.handleChange('email')}
+                            onChange={(e) => setEmail(e.target.value)}
                         />
                         <br/><br/>
                         <TextField 
@@ -71,12 +68,12 @@ export class Login extends Component {
                             label="Password" 
                             type="password"
                             variant="outlined"
-                            onChange={this.handleChange('password')}
+                            onChange={(e) => setPassword(e.target.value)}
                             margin="normal"
                         />
                         <br/><br/>
-                        <p style={{color:"red"}}>{this.state.label}</p>
-                        <Button variant="contained" color="primary" onClick={this.handleSubmit}>
+                        <p style={{color:"red"}}>{label}</p>
+                        <Button variant="contained" color="primary" onClick={handleSubmit}>
                             Submit
                         </Button>
                         <br/><br/>
@@ -84,7 +81,7 @@ export class Login extends Component {
                 </Container>
             </React.Fragment>
         )
-    }
+    
 }
 
 export default Login
