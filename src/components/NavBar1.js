@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import {useHistory} from'react-router'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,6 +22,12 @@ export default function NavBar1() {
   const classes = useStyles();
   const user =JSON.parse(localStorage.getItem("user"))
   console.log((user))
+  const history = useHistory()
+
+  function handleLogout(){
+      localStorage.removeItem("user")
+      history.push('/')
+  }
 
   return (
     <div className={classes.root}>
@@ -30,7 +37,12 @@ export default function NavBar1() {
             <Button className={classes.button} color="inherit">ABOUT US</Button>
             <Button className={classes.button} color="inherit">CONTACT US</Button>
             <Typography align="right" className={classes.title}>
-              {/* {user.name.fname} {user.name.lname}*/} logged in
+<<<<<<< HEAD
+               {user.name.fname} {user.name.lname}
+=======
+              <Button className={classes.button} color="inherit" onClick={handleLogout}>LOGOUT</Button>
+                {user.name.fname} {user.name.lname}
+>>>>>>> 2f384f1c502d9f8af603700e0553ed14a196104b
             </Typography>
         </Toolbar>
       </AppBar>

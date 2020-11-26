@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1,2,3,4,5,6];
 
-export default function Restaurants() {
+export default function Restaurants(props) {
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -56,20 +56,20 @@ export default function Restaurants() {
                 </div>
                 <Container className={classes.cardGrid} maxWidth="md">
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                        <Grid item key={card} xs={12} sm={6} md={4}>
+                        {props.restaurants.map((resto) => (
+                        <Grid item key={resto._id} xs={12} sm={6} md={4}>
                             <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image="https://source.unsplash.com/random"
-                                title="Image title"
+                                image={resto.imgSRC}
+                                title={resto.name}
                             />
                             <CardContent className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Outlet Name
+                                    {resto.name}
                                 </Typography>
                                 <Typography>
-                                    You can use this section to describe the outlet.
+                                    {resto.description}
                                 </Typography>
                             </CardContent>
                             <CardActions>
