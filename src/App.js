@@ -7,6 +7,7 @@ import Rides from './components/Rides'
 import { Switch, Route, Redirect, withRouter,BrowserRouter } from 'react-router-dom'
 import Restaurants from './components/Restaurants'
 import axios from 'axios'
+import Restaurant from './components/Restaurant'
 
 export class App extends Component {
   constructor(props){
@@ -55,6 +56,7 @@ export class App extends Component {
          
             <Route exact path='/rides' component={()=><Rides rides={this.state.rides}/>}></Route>
             <Route exact path='/restaurants' component={()=><Restaurants restaurants={this.state.restaurants}/>}></Route>
+            <Route exact path='/restaurant' component={()=><Restaurant/>}></Route>
             <Redirect to='/home'></Redirect>
           </Switch>
         </BrowserRouter>
