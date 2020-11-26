@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3];
 
-export default function Rides() {
+export default function Rides(props) {
     const classes = useStyles();
     return (
         <React.Fragment>
@@ -57,20 +57,20 @@ export default function Rides() {
                         Roller Coasters
                     </Typography>
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                        <Grid item key={card} xs={12} sm={6} md={4}>
+                        {props.rides.filter(ride=>ride.rideType=="rollercoaster").map((ride) => (
+                        <Grid item key={ride._id} xs={12} sm={6} md={4}>
                             <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image="https://source.unsplash.com/random"
-                                title="Image title"
+                                image={ride.imgSRC}
+                                title={ride.name}
                             />
                             <CardContent className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Ride Name
+                                    {ride.name}
                                 </Typography>
                                 <Typography>
-                                    You can use this section to describe the ride.
+                                    {ride.description}
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -87,20 +87,20 @@ export default function Rides() {
                         Family Rides
                     </Typography>
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                        <Grid item key={card} xs={12} sm={6} md={4}>
+                    {props.rides.filter(ride=>ride.rideType=="familyride").map((ride) => (
+                        <Grid item key={ride._id} xs={12} sm={6} md={4}>
                             <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image="https://source.unsplash.com/random"
-                                title="Image title"
+                                image={ride.imgSRC}
+                                title={ride.name}
                             />
                             <CardContent className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Ride Name
+                                    {ride.name}
                                 </Typography>
                                 <Typography>
-                                    You can use this section to describe the ride.
+                                    {ride.description}
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -117,20 +117,20 @@ export default function Rides() {
                         Indoor AC Rides and Shows
                     </Typography>
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                        <Grid item key={card} xs={12} sm={6} md={4}>
+                    {props.rides.filter(ride=>ride.rideType=="indoor").map((ride) => (
+                        <Grid item key={ride._id} xs={12} sm={6} md={4}>
                             <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image="https://source.unsplash.com/random"
-                                title="Image title"
+                                image={ride.imgSRC}
+                                title={ride.name}
                             />
                             <CardContent className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Ride Name
+                                    {ride.name}
                                 </Typography>
                                 <Typography>
-                                    You can use this section to describe the ride.
+                                    {ride.description}
                                 </Typography>
                             </CardContent>
                             <CardActions>
@@ -147,20 +147,20 @@ export default function Rides() {
                         Kid Rides
                     </Typography>
                     <Grid container spacing={4}>
-                        {cards.map((card) => (
-                        <Grid item key={card} xs={12} sm={6} md={4}>
+                    {props.rides.filter(ride=>ride.rideType=="kidride").map((ride) => (
+                        <Grid item key={ride._id} xs={12} sm={6} md={4}>
                             <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image="https://source.unsplash.com/random"
-                                title="Image title"
+                                image={ride.imgSRC}
+                                title={ride.name}
                             />
                             <CardContent className={classes.cardContent}>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                    Ride Name
+                                    {ride.name}
                                 </Typography>
                                 <Typography>
-                                    You can use this section to describe the ride.
+                                    {ride.description}
                                 </Typography>
                             </CardContent>
                             <CardActions>

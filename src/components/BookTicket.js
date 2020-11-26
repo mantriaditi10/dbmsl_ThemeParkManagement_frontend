@@ -11,6 +11,7 @@ import Container from '@material-ui/core/Container';
 import NavBar1 from './NavBar1'
 import TextField from '@material-ui/core/TextField'
 import axios from 'axios';
+import {useHistory} from 'react-router'
 
 const useStyles = makeStyles((theme) => ({
   '@global': {
@@ -102,6 +103,7 @@ export default function Pricing() {
   const [children, setChildren] = useState(0);
   const [visitDate, setDate] = useState("");
   const user = JSON.parse(localStorage.getItem("user"))
+  const history =useHistory()
   
   function handleSubmit() {
     console.log(user)
@@ -109,11 +111,12 @@ export default function Pricing() {
           ticketType:ticketType,
           adults:adults,
           children:children,
-          datOfVisit:visitDate,
+          dateOfVisit:visitDate,
           userId:user._id
       })
       .then(res=>{
         console.log(res)
+        history.push('/home')
       })
       .catch(err=>console.log(err))
   }

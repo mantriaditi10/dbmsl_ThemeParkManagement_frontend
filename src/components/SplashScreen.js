@@ -105,7 +105,7 @@ export default function SplashScreen() {
                 Rides and Attractions
             </Typography>
             <Typography component="h6" variant="h6" align="right" gutterBottom>
-              <Link color="primary" href="">
+              <Link color="primary" href="/rides">
                 Browse All
               </Link>
             </Typography>
@@ -142,7 +142,7 @@ export default function SplashScreen() {
                 Restaurants and Food Joints
             </Typography>
             <Typography component="h6" variant="h6" align="right" gutterBottom>
-              <Link color="primary" href="">
+              <Link color="primary" href="/restaurants">
                 Browse All
               </Link>
             </Typography>
