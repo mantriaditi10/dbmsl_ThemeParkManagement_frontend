@@ -6,6 +6,7 @@ import BookTicket from './components/BookTicket'
 import Rides from './components/Rides'
 import { Switch, Route, Redirect, withRouter,BrowserRouter } from 'react-router-dom'
 import Restaurants from './components/Restaurants'
+import Restaurant from './components/Restaurant'
 
 export class App extends Component {
   render() {
@@ -21,6 +22,7 @@ export class App extends Component {
           */}
             <Route exact path='/rides' component={()=><Rides/>}></Route>
             <Route exact path='/restaurants' component={()=><Restaurants/>}></Route>
+            <Route exact path='/restaurant' component={() => <Restaurant/>}></Route>
             <Redirect to='/rides'></Redirect>
           </Switch>
         </BrowserRouter>
