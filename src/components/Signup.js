@@ -11,7 +11,6 @@ class Signup extends Component {
 
     constructor(props){
         super(props)
-
         this.handleSubmit=this.handleSubmit.bind(this)
     }
 
@@ -71,72 +70,71 @@ class Signup extends Component {
                         />
                         <br />
                         <TextField 
-                        id="fname"
-                        label="First Name" 
-                        variant="outlined"
-                        onChange={this.handleChange('fname')}
-                        margin="normal"
-                        style={styles.textfields}
+                            id="fname"
+                            label="First Name" 
+                            variant="outlined"
+                            onChange={this.handleChange('fname')}
+                            margin="normal"
+                            style={styles.textfields}
                         />
                         <TextField 
-                        id="lname"
-                        label="Last Name" 
-                        variant="outlined"
-                        onChange={this.handleChange('lname')}
-                        margin="normal"
-                        style={styles.textfields}
-                        />
-                        <br/>
-                        <TextField 
-                        id="mobile"
-                        label="Mobile No."
-                        variant="outlined" 
-                        onChange={this.handleChange('mobile')}
-                        margin="normal"
+                            id="lname"
+                            label="Last Name" 
+                            variant="outlined"
+                            onChange={this.handleChange('lname')}
+                            margin="normal"
+                            style={styles.textfields}
                         />
                         <br/>
                         <TextField 
-                        id="city"
-                        label="City"
-                        variant="outlined" 
-                        onChange={this.handleChange('city')}
-                        margin="normal"
-                        style={styles.textfields}
+                            id="mobile"
+                            label="Mobile No."
+                            variant="outlined" 
+                            onChange={this.handleChange('mobile')}
+                            margin="normal"
+                        />
+                        <br/>
+                        <TextField 
+                            id="city"
+                            label="City"
+                            variant="outlined" 
+                            onChange={this.handleChange('city')}
+                            margin="normal"
+                            style={styles.textfields}
                         />
                         <TextField 
-                        id="state"
-                        label="State"
-                        variant="outlined" 
-                        onChange={this.handleChange('state')}
-                        margin="normal"
-                        style={styles.textfields}
+                            id="state"
+                            label="State"
+                            variant="outlined" 
+                            onChange={this.handleChange('state')}
+                            margin="normal"
+                            style={styles.textfields}
                         /> 
                         <TextField 
-                        id="country"
-                        label="Country"
-                        variant="outlined" 
-                        onChange={this.handleChange('country')}
-                        margin="normal"
-                        style={styles.textfields}
+                            id="country"
+                            label="Country"
+                            variant="outlined" 
+                            onChange={this.handleChange('country')}
+                            margin="normal"
+                            style={styles.textfields}
                         />
                         <br/>
                         <TextField 
-                        id="Email"
-                        label="Email" 
-                        variant="outlined"
-                        onChange={this.handleChange('email')}
-                        margin="normal"
+                            id="Email"
+                            label="Email" 
+                            variant="outlined"
+                            onChange={this.handleChange('email')}
+                            margin="normal"
                         />
                         <br/>
                         <TextField 
-                        id="password-input"
-                        label="Password" 
-                        type="password"
-                        variant="outlined"
-                        onChange={this.handleChange('password')}
-                        margin="normal"
+                            id="password-input"
+                            label="Password" 
+                            type="password"
+                            variant="outlined"
+                            onChange={this.handleChange('password')}
+                            margin="normal"
                         />
-                        
                         {/* <br/><br/> */}
                         <p style={{color:"red"}}>{this.state.label}</p>
                         <Button variant="contained" color="primary" onClick={this.handleSubmit}>

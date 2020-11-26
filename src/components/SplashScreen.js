@@ -74,7 +74,6 @@ export default function SplashScreen() {
   }
   else{
 
-
   return (
     <React.Fragment>
       <NavBar1 />
