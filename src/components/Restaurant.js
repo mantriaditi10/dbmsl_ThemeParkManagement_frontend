@@ -103,6 +103,7 @@ const RestoDetails = {
         'American comfort food to your heart’s content with the likes of fries,' +
          'fried, classic burgers and more',
         Timings:'12pm - 8pm',
+        Menu_Specials: 'signature burgers, loaded fries, gourmet hot dogs',
 }
 
 export default function Blog() {
@@ -131,7 +132,8 @@ export default function Blog() {
                                     {<FiberManualRecordIcon style={{color:'red'}}/>}{RestoDetails.Service[2]}
                                     {<LocalBarIcon/>}{RestoDetails.Service[3]}
                                     <br />
-                                {<b><i>Table Availability</i></b>} : {RestoDetails.Table_Availability}<br/>    
+                                {<b><i>Table Availability</i></b>} : {RestoDetails.Table_Availability}<br/>
+                                {<b><i>Menu Specials</i></b>} : {RestoDetails.Menu_Specials}<br/>    
                             </Typography>
                         </CardContent>
                     </Card>
@@ -177,10 +179,10 @@ export default function Blog() {
                             </div>
                          </CardContent>
                          <CardActions>
-                    <Button fullWidth variant="contained" color="primary">
-                        Book Table
-                    </Button>
-                </CardActions>
+                            <Button fullWidth variant="contained" color="primary">
+                                Book Table
+                            </Button>
+                        </CardActions>
                     </Card>
                 </Grid>
             </Grid>

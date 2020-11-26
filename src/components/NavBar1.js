@@ -30,7 +30,7 @@ export default function NavBar1() {
             <Button className={classes.button} color="inherit">ABOUT US</Button>
             <Button className={classes.button} color="inherit">CONTACT US</Button>
             <Typography align="right" className={classes.title}>
-                {user.name.fname} {user.name.lname}
+              {/* {user.name.fname} {user.name.lname}*/} logged in
             </Typography>
         </Toolbar>
       </AppBar>
