@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function NavBar1() {
   const classes = useStyles();
+  const user =JSON.parse(localStorage.getItem("user"))
+  console.log((user))
 
   return (
     <div className={classes.root}>
@@ -28,7 +30,7 @@ export default function NavBar1() {
             <Button className={classes.button} color="inherit">ABOUT US</Button>
             <Button className={classes.button} color="inherit">CONTACT US</Button>
             <Typography align="right" className={classes.title}>
-                Logged in as username
+                {user.name.fname} {user.name.lname}
             </Typography>
         </Toolbar>
       </AppBar>

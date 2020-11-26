@@ -101,13 +101,16 @@ export default function Pricing() {
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
   const [visitDate, setDate] = useState("");
+  const user = JSON.parse(localStorage.getItem("user"))
   
   function handleSubmit() {
+    console.log(user)
       axios.post('/tickets',{
           ticketType:ticketType,
           adults:adults,
           children:children,
-          datOfVisit:visitDate
+          datOfVisit:visitDate,
+          userId:user._id
       })
       .then(res=>{
         console.log(res)
@@ -220,7 +223,7 @@ export default function Pricing() {
                     </div>
                 </CardContent>
                 <CardActions>
-                    <Button fullWidth variant="contained" color="primary" onClick={handleSubmit()}>
+                    <Button fullWidth variant="contained" color="primary" onClick={handleSubmit}>
                         Confirm
                     </Button>
                 </CardActions>
