@@ -8,9 +8,10 @@ import { Switch, Route, Redirect, withRouter,BrowserRouter } from 'react-router-
 import Restaurants from './components/Restaurants'
 import axios from 'axios'
 import Restaurant from './components/Restaurant'
+import Loading from './components/Loading'
 
 export class App extends Component {
-  constructor(props){
+  /*constructor(props){
     super(props)
   }
 
@@ -32,39 +33,42 @@ export class App extends Component {
           .catch(err=>console.log(err))
       })
       .catch(err=>console.log(err))
-  }
+  }*/
 
 
   render() {
-    if(this.state.isLoading===true){
+    /*if(this.state.isLoading===true){
       return(
         <div>
           Loading...
         </div>
       )
     }
-    else{
+    else{*/
     return (
       <div className="App">
         
         <BrowserRouter>
           <Switch>
+            {/*
             <Route exact path='/' component={()=><UserScreen/>}></Route>
             <Route exact path='/login_signup' component={()=><UserScreen/>}></Route>
             <Route exact path='/home' component={()=><SplashScreen/>}></Route>
             <Route exact path='/book' component={()=><BookTicket/>}></Route>
-         
             <Route exact path='/rides' component={()=><Rides rides={this.state.rides}/>}></Route>
             <Route exact path='/restaurants' component={()=><Restaurants restaurants={this.state.restaurants}/>}></Route>
+            */}
             <Route exact path='/restaurant' component={()=><Restaurant/>}></Route>
-            <Redirect to='/home'></Redirect>
+            <Route exact path='/loading' component={()=><Loading/>}></Route>
+            <Redirect to='/restaurant'></Redirect>
+          {/*<Redirect to='/home'></Redirect>*/}
           </Switch>
         </BrowserRouter>
       </div>
     )
   }
   }
-}
+//}
 
 export default App
 

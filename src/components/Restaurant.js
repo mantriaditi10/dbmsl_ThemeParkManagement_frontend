@@ -13,6 +13,11 @@ import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
 import LocalBarIcon from '@material-ui/icons/LocalBar';
 import Button from '@material-ui/core/Button'
 import CardActions from '@material-ui/core/CardActions'
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import PropTypes from 'prop-types';
+import FastfoodIcon from '@material-ui/icons/Fastfood';
+
 
 const useStyles = makeStyles((theme) => ({
     icon: {
@@ -106,8 +111,18 @@ const RestoDetails = {
         Menu_Specials: 'signature burgers, loaded fries, gourmet hot dogs',
 }
 
-export default function Blog() {
+export default function Restaurant() {
   const classes = useStyles();
+  const [open,setOpen] = React.useState(false);  
+
+  const handleClickOpen = () => {
+      setOpen(true);
+  }
+
+  const handleClose = () => {
+      setOpen(false);
+  }
+
   return (
     <React.Fragment>
       <NavBar1/>  
@@ -133,7 +148,7 @@ export default function Blog() {
                                     {<LocalBarIcon/>}{RestoDetails.Service[3]}
                                     <br />
                                 {<b><i>Table Availability</i></b>} : {RestoDetails.Table_Availability}<br/>
-                                {<b><i>Menu Specials</i></b>} : {RestoDetails.Menu_Specials}<br/>    
+                                {<b><i>Menu Specials</i></b>} :  {<FastfoodIcon style={{color:'orange'}}/>}{RestoDetails.Menu_Specials}<br/>    
                             </Typography>
                         </CardContent>
                     </Card>
@@ -179,7 +194,7 @@ export default function Blog() {
                             </div>
                          </CardContent>
                          <CardActions>
-                            <Button fullWidth variant="contained" color="primary">
+                            <Button fullWidth variant="contained" color="primary" onClick={handleClickOpen}>
                                 Book Table
                             </Button>
                         </CardActions>
@@ -187,7 +202,26 @@ export default function Blog() {
                 </Grid>
             </Grid>
             <br/><br/>
+            <SimpleDialog open={open} onClose={handleClose}/>
         </Container>
     </React.Fragment>
   );
 }
+
+function SimpleDialog(props) {
+    const { onClose, open } = props;
+  
+    const handleClose = () => {
+      onClose();
+    };
+    return (
+      <Dialog maxWidth="lg" align="center" onClose={handleClose} aria-labelledby="simple-dialog-title" open={open}>
+        <DialogTitle id="simple-dialog-title">{<h3>***** Table Booked *****</h3>}{<h5>Enjoy your Visit!</h5>}</DialogTitle>
+      </Dialog>
+    );
+  }
+
+  SimpleDialog.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+  };
