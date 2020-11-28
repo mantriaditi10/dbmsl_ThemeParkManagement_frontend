@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import TextField from "@material-ui/core/TextField"
 import Button from "@material-ui/core/Button"
 import { Container } from '@material-ui/core'
@@ -6,50 +6,47 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import axios from 'axios';
+import {useHistory} from 'react-router'
 
-class Signup extends Component {
+function Signup() {
 
-    constructor(props){
-        super(props)
-        this.handleSubmit=this.handleSubmit.bind(this)
-    }
-
-    state = {
-        fname:"",
-        lname:"",
-        mobile:"",
-        city:"",
-        state:"",
-        country:"",
-        email:"",
-        password:"",
-        label:""
-    }
     
-    handleChange = input => e => {
-        this.setState({[input]:e.target.value});
-    }
+       const [fname,setfname]=useState("")
+       const [lname, setlname] = useState("")
+       const [mobile, setmobile] = useState(0)
+       const [city, setcity] = useState("")
+       const [state, setstate] = useState("")
+       const [country, setcountry] = useState("")
+       const [email, setemail] = useState("")
+       const [password, setpassword] = useState("")
+       const [label, setlabel] = useState("")
+       const history=useHistory()
+    
+    
+    
 
-    handleSubmit(){
+    function handleSubmit(){
         axios.post('/users/signin',{
             
-            fname:this.state.fname,
-            lname:this.state.lname,
-            city:this.state.city,
-            state:this.state.state,
-            country:this.state.country,
-            email:this.state.email,
-            password:this.state.password,
-            mobileNo:this.state.mobile
+            fname:fname,
+            lname:lname,
+            city:city,
+            state:state,
+            country:country,
+            email:email,
+            password:password,
+            mobileNo:mobile
         })
         .then((res)=>{
             if(res.data.success===true){
                 console.log(res.data.user)
-                localStorage.setItem('user',res.data.user)
+                localStorage.setItem("user",JSON.stringify(res.data.user))
+                setlabel("")
+                history.push('/login_signup')
             }
             if(res.data.success===false){
                 console.log(res.data.err)
-                this.setState({label:res.data.err})
+                setlabel(res.data.err)
             }
         })
         .catch(err=>{
@@ -57,7 +54,7 @@ class Signup extends Component {
         })
     }
 
-    render() {
+    
         return (
             <React.Fragment>
                 <Container>
@@ -73,7 +70,7 @@ class Signup extends Component {
                             id="fname"
                             label="First Name" 
                             variant="outlined"
-                            onChange={this.handleChange('fname')}
+                            onChange={(e) => setfname(e.target.value)}
                             margin="normal"
                             style={styles.textfields}
                         />
@@ -81,7 +78,7 @@ class Signup extends Component {
                             id="lname"
                             label="Last Name" 
                             variant="outlined"
-                            onChange={this.handleChange('lname')}
+                            onChange={(e) => setlname(e.target.value)}
                             margin="normal"
                             style={styles.textfields}
                         />
@@ -90,7 +87,7 @@ class Signup extends Component {
                             id="mobile"
                             label="Mobile No."
                             variant="outlined" 
-                            onChange={this.handleChange('mobile')}
+                            onChange={(e) => setmobile(e.target.value)}
                             margin="normal"
                         />
                         <br/>
@@ -98,7 +95,7 @@ class Signup extends Component {
                             id="city"
                             label="City"
                             variant="outlined" 
-                            onChange={this.handleChange('city')}
+                            onChange={(e) => setcity(e.target.value)}
                             margin="normal"
                             style={styles.textfields}
                         />
@@ -106,7 +103,7 @@ class Signup extends Component {
                             id="state"
                             label="State"
                             variant="outlined" 
-                            onChange={this.handleChange('state')}
+                            onChange={(e) => setstate(e.target.value)}
                             margin="normal"
                             style={styles.textfields}
                         /> 
@@ -114,7 +111,7 @@ class Signup extends Component {
                             id="country"
                             label="Country"
                             variant="outlined" 
-                            onChange={this.handleChange('country')}
+                            onChange={(e) => setcountry(e.target.value)}
                             margin="normal"
                             style={styles.textfields}
                         />
@@ -123,7 +120,7 @@ class Signup extends Component {
                             id="Email"
                             label="Email" 
                             variant="outlined"
-                            onChange={this.handleChange('email')}
+                            onChange={(e) => setemail(e.target.value)}
                             margin="normal"
                         />
                         <br/>
@@ -132,12 +129,12 @@ class Signup extends Component {
                             label="Password" 
                             type="password"
                             variant="outlined"
-                            onChange={this.handleChange('password')}
+                            onChange={(e) => setpassword(e.target.value)}
                             margin="normal"
                         />
                         {/* <br/><br/> */}
-                        <p style={{color:"red"}}>{this.state.label}</p>
-                        <Button variant="contained" color="primary" onClick={this.handleSubmit}>
+                        <p style={{color:"red"}}>{label}</p>
+                        <Button variant="contained" color="primary" onClick={handleSubmit}>
                             Submit
                         </Button>
                         <br/><br/>
@@ -146,7 +143,7 @@ class Signup extends Component {
                 </Container>
             </React.Fragment>
         )
-    }
+    
 }
 
 const styles = {

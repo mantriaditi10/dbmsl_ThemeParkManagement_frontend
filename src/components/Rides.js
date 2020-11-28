@@ -74,7 +74,7 @@ export default function Rides(props) {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" href={"rides/"+ride._id}>
                                     View
                                 </Button>
                             </CardActions>
@@ -104,7 +104,7 @@ export default function Rides(props) {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" href={"rides/"+ride._id}>
                                     View
                                 </Button>
                             </CardActions>
@@ -134,7 +134,7 @@ export default function Rides(props) {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" href={"rides/"+ride._id}>
                                     View
                                 </Button>
                             </CardActions>
@@ -164,7 +164,7 @@ export default function Rides(props) {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" href={"rides/"+ride._id}>
                                     View
                                 </Button>
                             </CardActions>

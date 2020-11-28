@@ -42,27 +42,16 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3];
 
-export default function SplashScreen() {
+export default function SplashScreen(props) {
   const classes = useStyles();
   const [rides,setRides]=useState([])
   const [resto,setResto]=useState([])
   const [isLoading,setIsLoading]=useState(true)
 
   useEffect(()=>{
-      axios.get('/rides/featured')
-      .then(rides=>{
-          console.log(rides.data)
-          setRides(rides.data)
-          axios.get('/restaurants/featured')
-          .then(resto=>{
-            console.log(resto.data)
-            setResto(resto.data)
-          })
-      })
-      .then(rides=>{
-        setIsLoading(false)
-      })
-      .catch(err=>console.log(err))
+      setRides(props.rides)
+      setResto(props.restaurants)
+      setIsLoading(false)
   },[])
 
   if(isLoading===true){
@@ -94,6 +83,7 @@ export default function SplashScreen() {
                   <Button size="large" variant="contained" color="primary" href="/book">
                     Book Tickets
                   </Button>
+                  
                 </Grid>
               </Grid>
             </div>
@@ -128,7 +118,7 @@ export default function SplashScreen() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" href={"rides/"+ride._id}>
                       Details
                     </Button>
                   </CardActions>
@@ -165,7 +155,7 @@ export default function SplashScreen() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small" color="primary">
+                    <Button size="small" color="primary" href={"restaurants/"+resto._id}>
                       Details
                     </Button>
                   </CardActions>

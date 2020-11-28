@@ -33,12 +33,12 @@ export default function NavBar1() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-            <Button className={classes.button} color="inherit">HOME</Button>
+            <Button className={classes.button} color="inherit" href="/home">HOME</Button>
             <Button className={classes.button} color="inherit">ABOUT US</Button>
             <Button className={classes.button} color="inherit">CONTACT US</Button>
             <Typography align="right" className={classes.title}>
               <Button className={classes.button} color="inherit" onClick={handleLogout}>LOGOUT</Button>
-                {/*{user.name.fname} {user.name.lname}*/}
+                {user.name.fname} {user.name.lname}
             </Typography>
         </Toolbar>
       </AppBar>

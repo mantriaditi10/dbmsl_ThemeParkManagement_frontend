@@ -56,8 +56,8 @@ const useStyles = makeStyles((theme) => ({
 const tiers = [
   {
     title: 'Silver',
-    aprice: '800',
-    cprice: '550',
+    aprice: 800,
+    cprice: 550,
     description: [
         'Get Unlimited Ride access',
         'Regular Theme Park Ticket',
@@ -69,8 +69,8 @@ const tiers = [
   {
     title: 'Premium',
     subheader: 'Most popular',
-    aprice: '1500',
-    cprice: '800',
+    aprice: 1500,
+    cprice: 800,
     description: [
       'Jump the Queue',
       'Get Express Access to rides',
@@ -82,8 +82,8 @@ const tiers = [
   },
   {
     title: 'Gold',
-    aprice: '1000',
-    cprice: '650',
+    aprice: 1000,
+    cprice: 650,
     description: [
       'Express Access to any 3 rides',
       'Free Food Voucher Worth Rs.100',
@@ -102,6 +102,8 @@ export default function Pricing() {
   const [adults, setAdults] = useState(0);
   const [children, setChildren] = useState(0);
   const [visitDate, setDate] = useState("");
+  const [aprice, setaprice] = useState(0)
+  const [cprice, setcprice] = useState(0)
   const user = JSON.parse(localStorage.getItem("user"))
   const history =useHistory()
   
@@ -112,11 +114,12 @@ export default function Pricing() {
           adults:adults,
           children:children,
           dateOfVisit:visitDate,
-          userId:user._id
+          userId:user._id,
+          amount:aprice*adults+cprice*children
       })
       .then(res=>{
         console.log(res)
-        history.push('/home')
+        history.push('/ticket')
       })
       .catch(err=>console.log(err))
   }
@@ -163,7 +166,9 @@ export default function Pricing() {
                                 </ul>
                             </CardContent>
                             <CardActions>
-                                <Button fullWidth variant={tier.buttonVariant} onClick={() => setTicketType(tier.title)} color="primary">
+                                <Button fullWidth variant={tier.buttonVariant} onClick={() => {setTicketType(tier.title)
+                                                                              setaprice(tier.aprice)
+                                                                              setcprice(tier.cprice)}} color="primary">
                                     {tier.buttonText}
                                 </Button>
                             </CardActions>
@@ -222,6 +227,13 @@ export default function Pricing() {
                                     }}
                                     onChange={(e) => setDate(e.target.value)}
                                 />
+                            <br/><br/>
+                            <Typography component="h3" variant="h5" align="left">
+                                Amount to be paid : {aprice*adults+cprice*children}
+                            </Typography>
+                            <br/>
+                            
+                            
                         </div>               
                     </div>
                 </CardContent>

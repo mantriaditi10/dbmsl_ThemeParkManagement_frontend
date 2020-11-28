@@ -17,6 +17,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import PropTypes from 'prop-types';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
+import Loading from './Loading'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -111,9 +112,17 @@ const RestoDetails = {
         Menu_Specials: 'signature burgers, loaded fries, gourmet hot dogs',
 }
 
-export default function Restaurant() {
+export default function Restaurant(props) {
   const classes = useStyles();
   const [open,setOpen] = React.useState(false);  
+  const [resto,setResto]=React.useState({})
+  const [isLoading,setIsLoading] = React.useState(true); 
+
+//   useEffect(()=>{
+//       setResto(props.restaurant)
+//       setIsLoading(false)
+//   },[])
+
 
   const handleClickOpen = () => {
       setOpen(true);
@@ -132,23 +141,24 @@ export default function Restaurant() {
                 <Grid item xs={6} >
                     <Card>
                         <CardHeader
-                            title={<b><i>{RestoDetails.Name}</i></b>}
+                            title={<b><i>{props.restaurant.name}</i></b>}
                             titleTypographyProps={{ align: 'center' }}
                             subheaderTypographyProps={{ align: 'center' }}
                             className={classes.cardHeader}
                         />
                         <CardContent>
                             <Typography component="h4" align="left" variant="h6" color="textPrimary">
-                                {<b><i>Cuisine</i></b>} : {RestoDetails.Cuisine}<br/>
-                                {<b><i>Description</i></b>} : {RestoDetails.Description}<br/>
-                                {<b><i>Timing</i></b>} : {<AccessTimeIcon fontSize="small" />} {RestoDetails.Timings} <br/>
+                                {<b><i>Description</i></b>} : {props.restaurant.description}<br/>
+                                {<b><i>Cuisine</i></b>} : {props.restaurant.cuisine}<br/>
+                                {<b><i>Timing</i></b>} : {<AccessTimeIcon fontSize="small" />} {props.restaurant.timings} <br/>
                                 {<b><i>Service</i></b>} : 
-                                    {<FiberManualRecordIcon style={{color:'green'}}/>}{RestoDetails.Service[1]}
-                                    {<FiberManualRecordIcon style={{color:'red'}}/>}{RestoDetails.Service[2]}
-                                    {<LocalBarIcon/>}{RestoDetails.Service[3]}
+                                    
+                                    {<FiberManualRecordIcon style={{color:'green'}}/>}{props.restaurant.service[0]}
+                                    {<FiberManualRecordIcon style={{color:'red'}}/>}{props.restaurant.service[1]}
+                                    {/* {<LocalBarIcon/>}{RestoDetails.Service[3]} */}
                                     <br />
-                                {<b><i>Table Availability</i></b>} : {RestoDetails.Table_Availability}<br/>
-                                {<b><i>Menu Specials</i></b>} :  {<FastfoodIcon style={{color:'orange'}}/>}{RestoDetails.Menu_Specials}<br/>    
+                                {<b><i>Table Availability</i></b>} : {props.restaurant.table.total-props.restaurant.table.booked}<br/>
+                                {<b><i>Menu Specials</i></b>} :  {<FastfoodIcon style={{color:'orange'}}/>}{props.restaurant.specials}<br/>    
                             </Typography>
                         </CardContent>
                     </Card>
@@ -157,8 +167,8 @@ export default function Restaurant() {
                     <Card>
                         <CardMedia
                             className={classes.cardMedia}
-                            image="https://source.unsplash.com/random"
-                            title="Image title"
+                            image={props.restaurant.imgSRC}
+                            title={props.restaurant.name}
                         />
                     </Card>
                 </Grid>
@@ -177,16 +187,16 @@ export default function Restaurant() {
                          />
                          <CardContent>
                             <div>
-                                {Dishes.map((dish)=>(
+                                {props.dishes.map((dish)=>(
                                     <Grid container spacing={5}>
                                         <Grid item xs={6}>
                                             <Typography component="h4" align="left" variant="h6" color="textPrimary">
-                                                {dish.Name} 
+                                                {dish.dishName} 
                                             </Typography>
                                         </Grid>
                                         <Grid item xs={6}>
                                             <Typography component="h4" align="right" variant="h6" color="textPrimary">
-                                                {dish.Price} 
+                                                {dish.price} 
                                             </Typography>
                                         </Grid>
                                     </Grid>

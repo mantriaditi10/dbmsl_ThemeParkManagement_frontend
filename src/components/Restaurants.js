@@ -73,7 +73,7 @@ export default function Restaurants(props) {
                                 </Typography>
                             </CardContent>
                             <CardActions>
-                                <Button size="small" color="primary">
+                                <Button size="small" color="primary" href={"/restaurants/"+resto._id}>
                                     View
                                 </Button>
                             </CardActions>
