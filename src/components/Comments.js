@@ -89,7 +89,10 @@ export default function Comments(props){
     })
     .then(res=>{
         console.log(res)
+        
         setchange(false)
+        setfeedback("")
+        
     })
     .catch(err=>console.log(err))
   }
@@ -150,6 +153,7 @@ export default function Comments(props){
                                 multiline
                                 fullWidth
                                 rows={2}
+                                value={feedback}
                                 variant="outlined"
                                 onChange={(e) => setfeedback(e.target.value)}
                             />
