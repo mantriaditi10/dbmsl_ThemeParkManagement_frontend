@@ -11,6 +11,8 @@ import Restaurant from './components/Restaurant'
 import Loading from './components/Loading'
 import Ride from './components/Ride'
 import Ticket from './components/Ticket'
+import ContactUs from './components/ContactUs'
+import NavBar from './components/newNavBar'
 
 export class App extends Component {
   constructor(props){
@@ -110,10 +112,9 @@ export class App extends Component {
             <Route exact path='/rides/:id' component={rideWithId}></Route>
 
             <Route exact path='/restaurants' component={()=><Restaurants restaurants={this.state.restaurants}/>}></Route>
-           
-            <Route exact path='/restaurant' component={()=><Restaurant/>}></Route>
             <Route exact path='/restaurants/:id' component={restWithId}></Route>
-            
+            <Route exact path='/contactus' component={()=><ContactUs/>}></Route>
+            <Route exact path='/newnav' component={()=><NavBar/>}></Route>
           <Redirect to='/home'></Redirect>
           </Switch>
         </BrowserRouter>
