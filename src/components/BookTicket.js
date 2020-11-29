@@ -64,7 +64,7 @@ const tiers = [
         'Valid only for Date of Visit', 
         ],
     buttonText: 'Get Silver',
-    buttonVariant: 'outlined',
+    buttonVariant: 'contained',
   },
   {
     title: 'Premium',
@@ -90,7 +90,7 @@ const tiers = [
       'Regular Access to other Rides',
     ],
     buttonText: 'Get Gold',
-    buttonVariant: 'outlined',
+    buttonVariant: 'contained',
   },
 ];
 

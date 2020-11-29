@@ -65,9 +65,9 @@ export default function ContactUs() {
                                                     </Typography>
                                                     <Typography align="center" variant="body1">
                                                         <DraftsIcon/><br/>
-                                                        <Link href="#" onClick={preventDefault}>
+                                                        <a href="mailto:support@theme-park.com"     >
                                                             support@theme-park.com  
-                                                        </Link>
+                                                        </a>
                                                     </Typography>
                                                 </div>
                                             }

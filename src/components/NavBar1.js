@@ -7,6 +7,8 @@ import Button from '@material-ui/core/Button';
 import {useHistory} from'react-router'
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import axios from 'axios'
+import {saveAs} from 'file-saver'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,6 +44,16 @@ export default function NavBar1() {
       history.push('/')
   }
 
+  function downloadFile(){
+    axios.get('/bookedticket/'+user._id,{responseType:'blob'})
+    .then(data=>{
+      const pdfblob = new Blob([data.data],{type:'application/pdf'})
+      saveAs(pdfblob,'ticket.pdf')
+      history.push('/home')
+    })
+    .catch(err=>console.log(err))
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -65,7 +77,7 @@ export default function NavBar1() {
                     onClose={handleClose}
                 >
                   {/* <Button><MenuItem onClick={()=>setSelectedIndex("Ticket")} href="/ticket">My Ticket</MenuItem></Button> */}
-                <MenuItem onClick={()=>setSelectedIndex("Ticket")}><Button href="/ticket">My Ticket</Button></MenuItem>
+                <MenuItem onClick={()=>setSelectedIndex("Ticket")}><Button onClick={downloadFile} >My Ticket</Button></MenuItem>
                 <MenuItem onClick={()=>setSelectedIndex("Logout")}><Button onClick={handleLogout}>Logout</Button></MenuItem>
                 </Menu>
             </Typography>

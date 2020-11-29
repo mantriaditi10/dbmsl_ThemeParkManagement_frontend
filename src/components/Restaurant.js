@@ -18,6 +18,7 @@ import Dialog from '@material-ui/core/Dialog';
 import PropTypes from 'prop-types';
 import FastfoodIcon from '@material-ui/icons/Fastfood';
 import Loading from './Loading'
+import axios from 'axios'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -117,6 +118,7 @@ export default function Restaurant(props) {
   const [open,setOpen] = React.useState(false);  
   const [resto,setResto]=React.useState({})
   const [isLoading,setIsLoading] = React.useState(true); 
+  const [booked, setbooked] = React.useState(props.restaurant.table.booked)
 
 //   useEffect(()=>{
 //       setResto(props.restaurant)
@@ -130,6 +132,20 @@ export default function Restaurant(props) {
 
   const handleClose = () => {
       setOpen(false);
+  }
+
+  function updatetables(){
+    axios.put('/restaurants',{
+        id:props.restaurant._id,
+        booked:props.restaurant.table.booked+1,
+        total:props.restaurant.table.total
+    })
+    .then(res=>{
+        console.log(res)
+        setbooked(pre=>pre+1)
+        handleClickOpen()
+    })
+    .catch(err=>console.log(err))
   }
 
   return (
@@ -157,7 +173,7 @@ export default function Restaurant(props) {
                                     {<FiberManualRecordIcon style={{color:'red'}}/>}{props.restaurant.service[1]}
                                     {/* {<LocalBarIcon/>}{RestoDetails.Service[3]} */}
                                     <br />
-                                {<b><i>Table Availability</i></b>} : {props.restaurant.table.total-props.restaurant.table.booked}<br/>
+                                {<b><i>Table Availability</i></b>} : {props.restaurant.table.total-booked}<br/>
                                 {<b><i>Menu Specials</i></b>} :  {<FastfoodIcon style={{color:'orange'}}/>}{props.restaurant.specials}<br/>    
                             </Typography>
                         </CardContent>
@@ -204,7 +220,7 @@ export default function Restaurant(props) {
                             </div>
                          </CardContent>
                          <CardActions>
-                            <Button fullWidth variant="contained" color="primary" onClick={handleClickOpen}>
+                            <Button fullWidth variant="contained" color="primary" onClick={updatetables}>
                                 Book Table
                             </Button>
                         </CardActions>
