@@ -2,12 +2,12 @@ import React,{useState,useEffect} from 'react'
 import NavBar1 from './NavBar1'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles, CardHeader, CardContent, List, ListItem, ListItemText, Divider } from '@material-ui/core'
+import { makeStyles, CardHeader, CardContent, CardActions, List, ListItem, ListItemText, Divider } from '@material-ui/core'
 import Card from '@material-ui/core/Card'
 import axios from 'axios'
 import Loading from './Loading'
 import Moment from 'moment';
-
+import Button from '@material-ui/core/Button'
 
 const useStyles = makeStyles((theme) => ({
     heroContent: {
@@ -160,6 +160,11 @@ export default function Ticket() {
                                         <Divider />
                                     </List>
                                 </CardContent>
+                                <CardActions>
+                                    <Button fullWidth variant="contained" color="primary">
+                                        Download Ticket PDF
+                                    </Button>
+                                </CardActions>
                             </Card>
                         </Container>
                         <br/><br/>
