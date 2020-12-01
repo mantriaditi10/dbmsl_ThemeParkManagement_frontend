@@ -64,6 +64,16 @@ export default function Ticket() {
         .catch(err=>console.log(err))
     },[])
 
+    function downloadFile(){
+        axios.get('/bookedticket/'+user._id,{responseType:'blob'})
+        .then(data=>{
+          const pdfblob = new Blob([data.data],{type:'application/pdf'})
+          saveAs(pdfblob,'ticket.pdf')
+          history.push('/home')
+        })
+        .catch(err=>console.log(err))
+      }
+
     const classes = useStyles();
     if(isLoading===true){
         return(<Loading/>)
@@ -161,7 +171,7 @@ export default function Ticket() {
                                     </List>
                                 </CardContent>
                                 <CardActions>
-                                    <Button fullWidth variant="contained" color="primary">
+                                    <Button fullWidth variant="contained" color="primary" onClick={downloadFile}>
                                         Download Ticket PDF
                                     </Button>
                                 </CardActions>

@@ -44,15 +44,7 @@ export default function NavBar1() {
       history.push('/')
   }
 
-  function downloadFile(){
-    axios.get('/bookedticket/'+user._id,{responseType:'blob'})
-    .then(data=>{
-      const pdfblob = new Blob([data.data],{type:'application/pdf'})
-      saveAs(pdfblob,'ticket.pdf')
-      history.push('/home')
-    })
-    .catch(err=>console.log(err))
-  }
+  
 
   return (
     <div className={classes.root}>
@@ -77,7 +69,7 @@ export default function NavBar1() {
                     onClose={handleClose}
                 >
                   {/* <Button><MenuItem onClick={()=>setSelectedIndex("Ticket")} href="/ticket">My Ticket</MenuItem></Button> */}
-                <MenuItem onClick={()=>setSelectedIndex("Ticket")}><Button onClick={downloadFile} >My Ticket</Button></MenuItem>
+                <MenuItem onClick={()=>setSelectedIndex("Ticket")}><Button  href="/ticket">My Ticket</Button></MenuItem>
                 <MenuItem onClick={()=>setSelectedIndex("Logout")}><Button onClick={handleLogout}>Logout</Button></MenuItem>
                 </Menu>
             </Typography>
